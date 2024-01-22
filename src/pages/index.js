@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { client } from '../../libs/client';
 import { Inter } from "next/font/google";
+import Image from 'next/image';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +19,12 @@ export const getStaticProps = async () => {
 
 export default function Home({ blog }) {
   return (
-    <div>
+    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-items-center gap-y-8 gap-x-4'>
       {blog.map((blog) => (
-        <li key={blog.id}>
+        <li key={blog.id} className='list-none w-40'>
+          <img src={blog.image.url} alt={blog.title} className='w-60 h-30 rounded'/>
           <Link href={`blog/${blog.id}`}>
-          {blog.title}
+            <p className='text-sm'>{blog.title}</p>
           </Link>
         </li>
       ))}
